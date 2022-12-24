@@ -1,0 +1,93 @@
+wow = new WOW(
+    {
+      boxClass:     'wow',      // default
+      animateClass: 'animated', // default
+      offset:       0,          // default
+      mobile:       true,       // default
+      live:         true        // default
+    }
+  )
+wow.init();
+
+/*=================================
+||          Smooth Scrooling
+==================================*/
+    $(function() {
+        $('.menu-scroll').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: (target.offset().top - 9)//top navigation height
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+
+
+/*====================================================================
+            Navbar shrink script
+======================================================================*/
+$(document).ready(function() {
+    $(window).scroll(function() {
+        if ($(document).scrollTop() > 50) {
+            $('nav').addClass('shrink');
+        }
+        else {
+            $('nav').removeClass('shrink');
+        }
+    });
+});
+
+
+
+/*=================================================================
+            Load more button
+===================================================================*/
+
+$(document).ready(function () {
+    $("#loadMenuContent").click(function(event) {
+
+        $.get("php/ajax_menu.html", function(data){
+            $('#moreMenuContent').append(data);
+        });
+        event.preventDefault();
+        $(this).hide();
+    }) ;
+});
+
+$(document).ready(function () {
+
+    var $menuPricing = $('.menu-pricing');
+    $menuPricing.mixItUp({
+        selectors: {
+            target: 'li'
+        }
+    });
+
+});
+
+
+/*=================================================
+        Showing Icon in placeholder
+=====================================================*/
+
+$('.iconified').on('keyup', function() {
+    var input = $(this);
+    if(input.val().length === 0) {
+        input.addClass('empty');
+    } else {
+        input.removeClass('empty');
+    }
+});
+
+/*=========================================================
+                Scroll  Speed
+=======================================================*/
+
+// $(function() {
+//     jQuery.scrollSpeed(100, 1000);
+// });

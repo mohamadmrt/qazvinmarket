@@ -1,0 +1,44 @@
+@font-face {
+	font-family: 'IRANSans';
+	src: url('./../../fonts/sans/eot/IRANSansWeb(FaNum).eot');
+	src: url('./../../fonts/sans/eot/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),
+	url('./../../fonts/sans/woff/IRANSansWeb(FaNum).woff') format('woff'),
+	url('./../../fonts/sans/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+
+body{
+	font-family:IRANSans;
+
+}
+
+.print-area {
+	font-family:IRANSans;
+	width:8cm;
+ 	background-color:#FFFFFF;
+	text-align:center;
+  	font-size:12px;
+ 	direction:rtl;
+}
+
+table {
+ 	text-align: center;
+
+}
+
+table tr td, table tr th {
+	border: 1px solid #000000;
+
+}
+
+.table-list tr th {
+	font-size:15px;
+ 	border: 1px solid #000000;
+
+}
+
+.table-list tr td {
+	font-size:15px;
+	font-weight:normal;
+	padding:0px;
+	line-height:1.4em;
+}

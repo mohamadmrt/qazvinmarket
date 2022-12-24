@@ -1,0 +1,295 @@
+.sarfaslMarket{
+  background-color: #3f51b5;
+  border-radius:10px;
+  border: 1px black solid;
+  overflow: hidden
+}
+
+.colorBtn{
+
+  background-color: white;
+
+}
+
+.vcenter {
+
+  display: inline-block;
+
+  vertical-align: middle;
+
+  float: none;
+
+}
+
+td {vertical-align:middle !important;}
+
+#pishfaktor {
+
+  overflow: auto;
+
+  width: 217px;
+
+  padding: 0 0px;
+
+}
+
+.tfn {margin-left:5px;}
+
+@media(max-width:767px){
+
+  #pishfaktor {
+
+    width: 285px !important;
+
+  }
+
+  .tfn {margin-left:20px !important;}
+
+}
+
+.leftmr {padding-left:10px;}
+
+.scroll-up1,
+
+.scroll-down1 {
+
+  width: 17px;
+
+  height: 17px;
+
+  cursor:default;
+
+}
+
+.scroll-up1 {
+
+  background: url(/ui_images/xp-vert-btns.png) no-repeat;
+
+}
+
+.scroll-up1:hover {
+
+  background-position: -17px 0;
+
+  cursor:default;
+
+}
+
+.scroll-down1 {
+
+  background: url(/ui_images/xp-vert-btns.png) no-repeat 0 -17px;
+
+}
+
+.scroll-down1:hover {
+
+  background-position: -17px -17px;
+
+  cursor: default;
+
+}
+
+.track1 {
+
+  width: 16px;
+
+  background-color: #f7f7f3;
+
+  border-left: 1px solid #f2f0ea;
+
+}
+
+.handle1 {
+
+  width: 17px;
+
+  margin-left: -1px;
+
+  background: url(/ui_images/xp-vert-handle.png) no-repeat 0 center;
+
+}
+
+.handle1:hover {
+
+  background-position: -17px center;
+
+  cursor:default;
+
+}
+
+
+
+
+
+.handle1 .top,
+
+.handle1 .bottom {
+
+  position: absolute;
+
+  left: 0;
+
+  width: 17px;
+
+  height: 10px;
+
+  background: url('/ui_images/xp-vert-handle.png') no-repeat;
+
+}
+
+.handle1 .top {
+
+  top: 0;
+
+}
+
+.handle1:hover .top {
+
+  background-position: -17px 0;
+
+}
+
+.handle1 .bottom {
+
+  bottom: 0;
+
+  width: 17px;
+
+  height: 10px;
+
+  background-position: 0 bottom;
+
+}
+
+.handle1:hover .bottom {
+
+  background-position: -17px bottom;
+
+}
+
+@media (min-width: 768px){
+
+  .col1 {
+
+    float:left !important;
+
+  }
+
+  .col2 {
+
+    float:right !important;
+
+  }
+
+}
+
+.back-to-top i {
+
+  display: block;
+
+  width: 36px;
+
+  height: 36px;
+
+  line-height: 36px;
+
+  transition: all 0.2s ease-in-out 0s;
+
+}
+
+.back-to-top {
+
+  display: none;
+
+  position: fixed;
+
+  bottom: 60px;
+
+  left: 15px;
+
+  border-radius: 3px;
+
+  text-align: center;
+
+}
+
+.btn-default{color: #5b85a4;border-color: #ccc;}
+
+.btn-support {
+
+  border-color: rgba(230, 230, 230, 1);
+
+  color: #000;
+
+  margin: 0px;
+
+  line-height: 18px;
+
+  padding: 0px 4px;
+
+}
+
+.btn-green {
+
+  color: #000;
+
+  margin: 0px;
+
+  line-height: 18px;
+
+  border-color: rgba(230, 230, 230, 1);
+
+  padding: 0px 4px;
+
+}
+
+.btn-red {
+
+  color: #000;
+
+  margin: 0px;
+
+  line-height: 18px;
+
+  border-color:rgba(230, 230, 230, 1);
+
+  padding: 0px 4px;
+
+}
+
+/*ul li{*/
+
+/*margin-right: 9px;*/
+
+/*}*/
+
+
+ul .active{
+
+  border-top: 1px solid red;
+
+  border-radius: 0px;
+
+}
+
+
+
+@media (max-width: 375px){
+
+  .top-responsive{
+
+    margin-top: 25%;
+
+  }
+
+}
+
+@media (max-width: 319px){
+
+  .top-responsive{
+
+    margin-top: 65%;
+
+  }
+
+}

@@ -1,0 +1,77 @@
+/*general style**************************************/
+
+@font-face {
+    font-family: 'IRANSans';
+    src: url('../../fonts/sans/eot/IRANSansWeb(FaNum).eot');
+    src: url('../../fonts/sans/eot/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/sans/woff/IRANSansWeb(FaNum).woff') format('woff'),
+    url('../../fonts/sans/woff2/IRANSansWeb(FaNum).woff2') format('woff2'),
+    url('../../fonts/sans/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+a {
+	 display:inline-block;
+ }
+body{
+	font-family:IRANSans;
+ }
+
+div#footer{
+    min-height:227px;
+    background:url('../images/pattern-footer.png');
+}
+div.inner div#about,div.inner div#contact{
+    height:150px;
+    margin:25px 0;
+}
+div#footer h3{
+    margin:0;
+}
+div#footer h3 a{
+    display:block;
+    color:#fff; 
+}
+div.inner div#links{
+    height:150px;
+    margin:25px 20px;    
+}
+div#footer p{
+    color:#fff;
+}
+div#footer p.support{
+    direction:ltr;
+    padding-left:30px;
+    background:url('../images/email.png') no-repeat left center;    
+}
+div#footer p.tell{
+    direction:ltr;
+    padding-left:30px;
+    background:url('../images/tell.png') no-repeat left center; 
+	color:#FFFFFF;
+}
+.titr-footer{
+    margin:0;
+    width:100%;
+    border-bottom:2px solid #ffc700;
+    color:#ffc700;
+    margin-bottom:10px;    
+}
+@media screen and (max-width: 400px){
+    img.logo {
+		width:270px;
+}
+}
+.fheader {background-image:url(../../images/pat1.jpg);}
+
+/*
+@media screen and (max-width: 1500px){
+.fheader {background-image:url(../../images/pat1.jpg);}
+}
+*/
+@media (min-width: 1200px) {
+     container{
+        max-width: 1050px;
+    }
+}
+.table-responsive .table {
+    max-width: none;
+}

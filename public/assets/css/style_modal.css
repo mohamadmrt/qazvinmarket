@@ -1,0 +1,173 @@
+/*------------------modal-----------*/
+.modal-header {
+    border-radius: 6px 6px 0px 0px;
+}
+.modal-header {
+    background: none repeat scroll 0% 0% #E5E5E5;
+    color: #A6A6A6;
+    text-align: center;
+}
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #E5E5E5;
+}
+.error-log {
+    color: #F00;
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
+    margin: 0px 0px 10px;
+}
+.success-log{
+    color: #5cb85c;
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
+    margin: 0px 0px 10px;
+}
+
+.formGroup input[type="text"], .formGroup input[type="password"] {
+    width: 70%;
+    padding-right: 13px;
+}
+input[type="text"], input[type="password"], input[type="email"] {
+    padding-right: 13px;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-radius: 0px;
+    box-shadow: none;
+    color: #484848;
+}
+.inputstyle{
+    border: 1px solid #cccccc;
+    padding-top:6px;
+    padding-bottom: 5px;
+    border-radius: 5px !important;
+}
+input[type="text"], textarea {
+    outline: medium none;
+}
+input {
+    outline: medium none;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+.formGroup {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+
+}
+
+
+
+
+.formGroup input[type="submit"], .formGroup input[type="button"] {
+    width:50%;
+    height: 40px;
+    background: none repeat scroll 0% 0% #16B82F;
+    color: #FFF;
+    border: medium none;
+    border-radius: 6px;
+    margin-top: 10px;
+    transition: box-shadow 0.3s ease 0s;
+}
+
+
+.btn_loader_o {
+    position: relative;
+    overflow: hidden;
+
+}
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    cursor: pointer;
+}
+.shadow {
+    box-shadow: 0px 3px 5px 0px #D6D6D6;
+}
+input {
+    outline: medium none;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+input {
+    line-height: normal;
+}
+button, input, optgroup, select, textarea {
+    margin: 0px;
+    font: inherit;
+    color: inherit;
+}
+.loader_abs, .loader_abs2 {
+    position: absolute;
+    top: -44px;
+    right: 0px;
+    left: 0px;
+    display: none;
+}
+
+.text-formgroup {
+    text-align: center;
+    color: #A0A0A0;
+    font-size: 13px;
+}
+.mtop26 {
+    margin-top: 20px;
+}
+.left {
+    float: left;
+}
+.right{
+    float: right;
+}
+a:focus, a, a:hover {
+    outline: medium none !important;
+    text-decoration: none !important;
+}
+.footer-login a {
+    color: #6E6E6E;
+    font-size: 12px;
+}
+a:focus {
+    outline-offset: -2px;
+}
+a:focus, a:hover {
+    color: #23527C;
+    text-decoration: underline;
+}
+.full {
+    width: 100%;
+}
+
+#success_green {
+    color: #6BC059;
+    text-align: center;
+    display: none;
+    bottom: 0px;
+    top: 0px;
+    margin: auto;
+}
+
+.desc_hamishegi {
+    font-size: 16px;
+    color: #7E7E7E;
+    text-align: justify;
+    margin-top: 18px;
+}
+.hamishegi_center {
+    width: 80%;
+    padding-bottom: 30px;
+}
+.auto {
+    margin: auto;
+}
+ 
