@@ -305,11 +305,14 @@
             params.search_by_price = $('#search_by_price').val() ? $('#search_by_price').val() : '';
             params.search_by_status = $('#search_by_status').val() ? $('#search_by_status').val() : '';
             params.search_by_newest = $('#search_by_newest').val() ? $('#search_by_newest').val() : '';
+            params.search_by_mfg_date_show = $('#search_by_mfg_date_show').val() ? $('#search_by_mfg_date_show').val() : '';
+            params.search_by_exp_date_show = $('#search_by_exp_date_show').val() ? $('#search_by_exp_date_show').val() : '';
             $.ajax({
                 method: 'GET',
                 url: `/ocms/cargoList/?page=${page}`,
                 data: {params: params},
                 success: function (result) {
+
 
                     if (result.cargos.length < 1) {
                         // swal({type: 'error',title: 'هیچ کالایی یافت نشد'})
@@ -339,9 +342,9 @@
                             data += `<td>${formatPrice(item.vote_count)}</td>`;
                             data += `<td>${formatPrice(item.max_order)}</td>`;
                             data += `<td>${item.status === "0" ? '<span class="label label-danger">خیر</span>' : '<span class="label label-success">بله</span>'}</td>`;
-                            data += `<td>${item.newest === "0" ? '<span class="label label-danger">خیر</span>' : '<span class="label label-success">بله</span>'}</td>`;
                             data += `<td>${item.mfg_date_show === 0 ? '<span class="label label-danger">خیر</span>' : '<span class="label label-success">بله</span>'}</td>`;
                             data += `<td>${item.exp_date_show === 0 ? '<span class="label label-danger">خیر</span>' : '<span class="label label-success">بله</span>'}</td>`;
+                            data += `<td>${item.newest === "0" ? '<span class="label label-danger">خیر</span>' : '<span class="label label-success">بله</span>'}</td>`;
                             data += `<td>
 <a class="btn btn-block btn-primary" title="ویرایش" onclick="_editCargo(${item.id})"><i class="fas fa-pencil"></i></a>
 ${item.status === "0" ? '<a class="btn btn-block btn-success" title="نمایش در سایت" onclick="_showCargo(' + item.id + ')"><i class="fas fa-eye"></i></a>' : '<a class="btn btn-block btn-danger" title="عدم نمایش" onclick="_showCargo(' + item.id + ')"><i class="fas fa-eye-slash"></i></a>'}

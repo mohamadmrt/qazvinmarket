@@ -103,7 +103,9 @@ class Cargo extends Model
             ->where('vote_count', 'LIKE', $keywords['search_by_vote_count'] . '%')
             ->where('max_order', 'LIKE', $keywords['search_by_max_order'] . '%')
             ->where('status', 'LIKE', $keywords['search_by_status'])
-            ->where('newest', 'LIKE', $keywords['search_by_newest']);
+            ->where('newest', 'LIKE', $keywords['search_by_newest'])
+            ->where('mfg_date_show', 'LIKE', $keywords['search_by_mfg_date_show'])
+            ->where('exp_date_show', 'LIKE', $keywords['search_by_exp_date_show']);
         return $query;
     }
 
