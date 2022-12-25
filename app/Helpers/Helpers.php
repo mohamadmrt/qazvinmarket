@@ -76,6 +76,16 @@ if (!function_exists('gregorian2jalali_without_seconds')) {
         }
     }
 }
+if (!function_exists('gregorian2jalali_without_time')) {
+    function gregorian2jalali_without_time($timestamp)
+    {
+        if ($timestamp != null) {
+            return CalendarUtils::strftime('Y/m/d', $timestamp);
+        } else {
+            return null;
+        }
+    }
+}
 if (!function_exists('jalali2gregorian')) {
     function jalali2gregorian($timestamp)
     {
