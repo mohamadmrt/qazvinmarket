@@ -435,7 +435,7 @@ ${item.newest === "0" ? '<a class="btn btn-block btn-success" title="جدیدت�
                     data += `</div>`;
                     data += `<div class="form-group">`;
                     data += `<label for="description">توضیحات</label>`;
-                    data += `<textarea id="description" class="form-control" name="description" rows="4" cols="50">${cargo.description}</textarea>`;
+                    data += `<textarea id="description" class="form-control" name="description" rows="4" cols="50">${cargo.description !== null ? cargo.description : ''}</textarea>`;
                     data += `</div>`;
                     data += `<div class="form-group col-md-6">`;
                     data += `<label for="mfg_date" >تاریخ تولید:</label>`;
