@@ -12,6 +12,7 @@ use App\Http\Resources\v1\CargoCollection;
 use App\Http\Resources\v1\OrderCollection;
 use App\Market;
 use App\MarketTime;
+use App\Menu;
 use App\Order;
 use App\Peyk;
 use App\Sms;
@@ -29,6 +30,18 @@ class CartController extends Controller
 {
     public function TestMrt()
     {
+
+//        $cargo_menus = DB::table('cargo_menu')->where('pivot_parent_id', null)->get();
+//
+//        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//
+//        foreach ($cargo_menus as $item) {
+//            $menu = Menu::where('id', $item->menu_id)->first();
+//
+//            DB::table('cargo_menu')
+//                ->where('menu_id',$item->menu_id )->where('cargo_id',$item->cargo_id)
+//                ->update(['pivot_parent_id' =>$menu->parent_id]);
+//        }
 
 
 //        $callback_url = env('APP_URL') . '/back/' . 1111111;
