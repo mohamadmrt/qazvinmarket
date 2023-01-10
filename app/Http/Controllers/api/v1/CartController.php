@@ -31,6 +31,10 @@ class CartController extends Controller
     public function TestMrt()
     {
 
+        $cartIds = Cart::pluck('id')->toArray();
+        shuffle($cartIds);
+
+        return $cartIds;
 //        $cargo_menus = DB::table('cargo_menu')->where('pivot_parent_id', null)->get();
 //
 //        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -459,7 +463,7 @@ class CartController extends Controller
                     Rule::in(["express", "verbal", "scheduled"])
                 ],
                 'cargos' => "required|array",
-                'cargos.*.count' => "required|integer|between:1,20",
+                'cargos.*.count' => "required|integer|between:1,30",
                 'cargos.*.id' => "required|exists:cargos,id",
                 'cargos.*.main_price' => "required|integer",
                 'tel' => 'required|regex:/(09)[0-9]{9}/',
