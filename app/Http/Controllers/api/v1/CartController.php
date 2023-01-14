@@ -483,6 +483,7 @@ class CartController extends Controller
             if ($validData->fails()) {
                 return response()->json([
                     'data' => $validData->messages()->all(),
+                    'error' => $validData->messages()->all(),
                     'message' => "اطلاعات وارد شده نامعتبر است.",
                     'status' => "invalid"
                 ], 422);
