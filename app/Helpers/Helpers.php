@@ -132,6 +132,7 @@ if (!function_exists('MellatPay')) {
 
     }
 }
+
 if (!function_exists('verify_payment')) {
     function verify_payment($SaleReferenceId, $SaleOrderId)
     {
@@ -148,13 +149,19 @@ if (!function_exists('verify_payment')) {
 
 
             $verify = $client->bpVerifyRequest($parameters, $namespace)->return;
-            if ($verify == "0") {
+            if ($verify == 0) {
                 $settle = $client->bpSettleRequest($parameters, $namespace)->return;
-                if ($settle == "0") {
+                if ($settle == 0) {
                     return 0;
+                } else {
+                    $client->bpReversalRequest($parameters);
+                    return 1;
                 }
+            } else {
+                $client->bpReversalRequest($parameters);
+                return 1;
             }
-            return 1;
+
 
         } catch (\Exception $e) {
             return $e->getMessage();
