@@ -38,7 +38,7 @@ class CargoController extends Controller
 
 
         try {
-            $cargos = Cargo::getByParent(fa2en($request->parent_id))->paginate(20);
+            $cargos = Cargo::getByParent(fa2en($request->parent_id),$request->filter)->paginate(20);
             return response()->json([
                 'status' => 'ok',
                 'priceUnit' => 'تومان',
