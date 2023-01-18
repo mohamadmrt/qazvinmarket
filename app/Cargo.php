@@ -5,6 +5,7 @@ namespace App;
 use App\Http\Controllers\Functions\FunctionController;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Morilog\Jalali\CalendarUtils;
 use function PHPUnit\Framework\fileExists;
 
@@ -13,75 +14,49 @@ class Cargo extends Model
     protected $with = ['menus'];
     protected $guarded = [];
 
-    static public function getByParent($parent_id)
+    static public function getByParent($parent_id, $filter)
     {
 
-        if (!empty($filter)) {
+        if (Menu::find($parent_id)->parent_id == 0) {
+            $cargos = Cargo::whereHas('menus', function ($query) use ($parent_id) {
+                $query->where('pivot_parent_id', $parent_id);
+            })->sellableCargos()->get();
 
-            switch ($filter) {
-                case "discount":
-                    if (Menu::find($parent_id)->parent_id == 0) {
-                        $parent_type = "mainParent";
-                    } else {
-                        $parent_type = "subParent";
-                    }
-                    if ($parent_type == 'mainParent') {
-                        $cargos = Cargo::whereHas('menus', function ($query) use ($parent_id) {
-                            $query->where('pivot_parent_id', $parent_id);
-                        })->sellableCargos()->get();
-                    } else {
-                        $cargos = Cargo::whereHas('menus', function ($query) use ($parent_id) {
-                            $query->where('menu_id', $parent_id);
-                        })->sellableCargos()->get();
-
-                    }
-                    $not_finished_cargos = $cargos->filter(function ($item) {
-                        return $item->max_count > 0;
-                    });
-                    $not_finished_cargos = $not_finished_cargos->sortBy('name');
-                    $finished_cargos = $cargos->filter(function ($item) {
-                        return $item->max_count == 0;
-                    });
-                    $finished_cargos = $finished_cargos->sortBy('name');
-                    return $not_finished_cargos->merge($finished_cargos);
-                    break;
-                case "blue":
-                    echo "Your favorite color is blue!";
-                    break;
-                case "green":
-                    echo "Your favorite color is green!";
-                    break;
-                default:
-                    echo "Your favorite color is neither red, blue, nor green!";
-            }
         } else {
+            $cargos = Cargo::whereHas('menus', function ($query) use ($parent_id) {
+                $query->where('menu_id', $parent_id);
+            })->sellableCargos()->get();
 
-            if (Menu::find($parent_id)->parent_id == 0) {
-                $parent_type = "mainParent";
-            } else {
-                $parent_type = "subParent";
-            }
-            if ($parent_type == 'mainParent') {
-                $cargos = Cargo::whereHas('menus', function ($query) use ($parent_id) {
-                    $query->where('pivot_parent_id', $parent_id);
-                })->sellableCargos()->get();
-            } else {
-                $cargos = Cargo::whereHas('menus', function ($query) use ($parent_id) {
-                    $query->where('menu_id', $parent_id);
-                })->sellableCargos()->get();
-
-            }
-            $not_finished_cargos = $cargos->filter(function ($item) {
-                return $item->max_count > 0;
-            });
-            $not_finished_cargos = $not_finished_cargos->sortBy('name');
-            $finished_cargos = $cargos->filter(function ($item) {
-                return $item->max_count == 0;
-            });
-            $finished_cargos = $finished_cargos->sortBy('name');
-            return $not_finished_cargos->merge($finished_cargos);
         }
 
+        if (!empty($filter)) {
+            switch ($filter) {
+                case(1):
+                    //search by max amount
+                    $cargos = $cargos->sortBy('price_discount');
+                    break;
+
+                case(2):
+                    //search by min amount
+                    $cargos = $cargos->sortByDesc('price_discount');
+                    break;
+
+                default:
+                    $cargos = $cargos->sortBy('name');
+            }
+        } else {
+            $cargos = $cargos->sortBy('name');
+        }
+
+        $not_finished_cargos = $cargos->filter(function ($item) {
+            return $item->max_count > 0;
+        });
+
+        $finished_cargos = $cargos->filter(function ($item) {
+            return $item->max_count == 0;
+        });
+
+        return $not_finished_cargos->merge($finished_cargos);
     }
 
     public function scopeSellableCargos($query)
