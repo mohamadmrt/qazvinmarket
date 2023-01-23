@@ -32,13 +32,18 @@ class Cargo extends Model
         if (!empty($filter)) {
             switch ($filter) {
                 case(1):
-                    //search by max amount
+                    //search by min amount
                     $cargos = $cargos->sortBy('price_discount');
                     break;
 
                 case(2):
-                    //search by min amount
+                    //search by max amount
                     $cargos = $cargos->sortByDesc('price_discount');
+                    break;
+
+                case(3):
+                    //search by max buy count
+                    $cargos = $cargos->sortByDesc('buy_count');
                     break;
 
                 default:
