@@ -98,6 +98,7 @@ Route::group(['middleware' => 'admin', 'namespace' => 'Admin', 'prefix' => 'ocms
     Route::post('/cancelOrder/{order}', 'OrderController@cancelOrder')->name('ocms.cancelOrder');
     Route::get('/resendSms/{id}', 'OrderController@resendSms')->name('ocms.resendSms');
     Route::get('/resend_factor/{order}', 'OrderController@resend_factor')->name('ocms.resend_factor');
+    Route::get('/success_order/{order}', 'OrderController@success_order')->name('ocms.success_order');
     Route::get('{market}/factorPrint/{order}', 'OrderController@factorPrint');
 
     Route::get('/users', 'UserController@users')->name('ocms.users');

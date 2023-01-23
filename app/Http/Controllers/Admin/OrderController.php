@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Bazara;
+use App\Cargo;
 use App\Coupon;
 use App\Events\UserActivation;
 use App\Http\Controllers\Admin\Auth\AdminController;
@@ -99,6 +100,25 @@ class OrderController extends AdminController
     {
         try {
             Bazara::send_factor($order);
+            return response(['data' => [], 'status' => 'ok']);
+        } catch (\Exception $e) {
+            return response(['data' => $e->getMessage(), 'status' => 'fail'], 422);
+        }
+    }
+
+    public function success_order(Order $order)
+    {
+        try {
+            if ($order->increase == 1){
+                foreach ($order['cargos'] as $cargo) {
+                    $cargo_db = Cargo::where('id', $cargo['id'])->first();
+                    $cargo_db->max_count = $cargo_db->max_count - $cargo['count'];
+                    $cargo_db->save();
+                }
+               $order->update(['lock_factor'=>'0','send_factor'=>'0','status'=>'4','bank'=>'4','valid'=>'1', 'time_lock'=>Carbon::now()]);
+            }else{
+                $order->update(['lock_factor'=>'0','increase'=>'0','send_factor'=>'0','status'=>'4','bank'=>'4','valid'=>'1', 'time_lock'=>Carbon::now()]);
+            }
             return response(['data' => [], 'status' => 'ok']);
         } catch (\Exception $e) {
             return response(['data' => $e->getMessage(), 'status' => 'fail'], 422);

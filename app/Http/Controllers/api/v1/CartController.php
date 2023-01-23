@@ -31,10 +31,14 @@ class CartController extends Controller
     public function TestMrt()
     {
 
-        $cartIds = Cart::pluck('id')->toArray();
-        shuffle($cartIds);
-
-        return $cartIds;
+//      $orders = Order::where('status','4')->latest()->take(10000)->get();
+//      foreach ($orders as $order){
+//          foreach ($order['cargos'] as $item){
+//              $cargo = Cargo::find($item['id']);
+//              $cargo->buy_count = $cargo->buy_count + $item['count'];
+//              $cargo->save();
+//          }
+//      }
 //        $cargo_menus = DB::table('cargo_menu')->where('pivot_parent_id', null)->get();
 //
 //        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -853,6 +857,11 @@ class CartController extends Controller
                         'status' => "4",
                         'valid' => "1"
                     ]);
+                    foreach ($order['cargos'] as $item) {
+                        $cargo = Cargo::find($item['id']);
+                        $cargo->buy_count = $cargo->buy_count + $item['count'];
+                        $cargo->save();
+                    }
                     if ($request_coupon != "") {
                         if ($coupon) {
                             $coupon->used_count += 1;

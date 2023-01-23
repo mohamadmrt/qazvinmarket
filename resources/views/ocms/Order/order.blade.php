@@ -320,6 +320,7 @@ ${item.bank === '4' ? '<strong class="label label-success">نقدی</strong>' : 
                                     <span class="fa fa-eye"></span>
                                     </button>
                                     ${item.status > 2 ? '<button title="ارسال مجدد به محک" type="button" data-id="' + item.id + '" class="resend-factor btn btn-block btn-warning"><span class="fa fa-repeat"></span></button>' : ''}
+                                    ${item.status < 2 ? '<button title="موفق کردن سفارش" type="button" data-id="' + item.id + '" class="success-order btn btn-block btn-info"><span class="fa fa-check"></span></button>' : ''}
                                     <button class="btn btn-primary btn-block balanceModal" data-toggle="modal" data-target="#balanceModal" data-id="[${item.id},${item.user_wallet},${item.user_id}]" title="افزایش اعتبار کاربر"><span class="fas fa-dollar-sign"></span></button>
                                     <button style="${item.status !== "4" ? 'display:none' : ''}" title="لغوسفارش" type="button" onclick="cancel_order('${item.id}',${item.valid})" class="btn btn-block btn-danger"><span class="fas fa-trash-alt"></span></button>
                                     <button title="چاپ" type="button" class="btn btn-default" onclick="window.open('/ocms/1/factorPrint/${item.id}','_blank')"><i class="fas fa-print fa-lg"></i></button></td>`;
@@ -445,6 +446,21 @@ ${item.bank === '4' ? '<strong class="label label-success">نقدی</strong>' : 
                     url: "/ocms/resend_factor" + '/' + order_id,
                     success: function (result) {
                         alert("با موفقیت ارسال شد")
+                    },
+                    error: function (result) {
+                        alert('خطایی رخ داد')
+                    }
+                })
+            }
+        });
+        $(document).on("click", ".success-order", function () {
+            if (confirm('آیا از موفق کردن سفارش اطمینان دارید؟')) {
+                let order_id = $(this).data('id');
+                $.ajax({
+                    method: 'get',
+                    url: "/ocms/success_order" + '/' + order_id,
+                    success: function (result) {
+                        alert("با موفقیت انجام شد")
                     },
                     error: function (result) {
                         alert('خطایی رخ داد')

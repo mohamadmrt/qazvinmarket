@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 use App\Address;
+use App\Cargo;
 use App\Cart;
 use App\Coupon;
 use App\Events\UserActivation;
@@ -143,6 +144,11 @@ class UserController extends Controller
                 $order->status = '4';
                 $order->valid = '1';
                 $order->save();
+                foreach ($order['cargos'] as $item) {
+                    $cargo = Cargo::find($item['id']);
+                    $cargo->buy_count = $cargo->buy_count + $item['count'];
+                    $cargo->save();
+                }
                 Sms::sendSmsSupporters(1,$order->id);
                 Sms::sendSmsSuccessOrder($order->id);
                 if ($order->used_coupon !== null) {
