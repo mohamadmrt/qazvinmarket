@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Cargo;
 use App\Cart;
 use App\Coupon;
 use App\Events\UserActivation;
@@ -21,7 +22,7 @@ class PayController extends Controller
         set_time_limit(180);
         $market = get_market(1);
         if ($order->bank == "4" or $order->bank == "3") {
-            $user = Token::where('jwt', $request->token)->first()->user;
+            $user = Token::where('ipg_token', fa2en($request->token))->first()->user;
         }
         //mellat
         if ($order->bank == "1") {
@@ -37,14 +38,19 @@ class PayController extends Controller
             if ($verify_payment == 0) {
                 $order->update([
                     'status' => "4",
-                    'valid'=>"1",
+                    'valid' => "1",
                 ]);
+                foreach ($order['cargos'] as $item) {
+                    $cargo = Cargo::find($item['id']);
+                    $cargo->buy_count = $cargo->buy_count + $item['count'];
+                    $cargo->save();
+                }
                 if ($user->is_ghasedak == "1" and $market->discount_ghasedak) {
                     $wallet = $user->wallet;
                     $deposit = $market->discount_ghasedak * $order->sum_of_cargos_price / 100;
                     Wallet::insert($user->id, $order->id, $order->sum_of_cargos_price, $deposit, '1', "4", "4", "افزایش اعتبار برای قاصدکی ها");
                     $user->update([
-                        'wallet' => $wallet+$deposit
+                        'wallet' => $wallet + $deposit
                     ]);
                 }
             }
@@ -69,7 +75,7 @@ class PayController extends Controller
             //empty cart
             Cart::where('user_id', $user->id)->delete();
             //send orders for market support
-            Sms::sendSmsSupporters(1,$order->id);
+            Sms::sendSmsSupporters(1, $order->id);
             Sms::sendSmsSuccessOrder($order->id);
         }
         $address = "/track-order/$order->url";
