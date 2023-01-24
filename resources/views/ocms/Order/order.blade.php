@@ -333,10 +333,13 @@ ${item.bank === '4' ? '<strong class="label label-success">نقدی</strong>' : 
                             <h4 class="modal-title">لیست سفارشها</h4>
                             </div>
                             <div class="modal-body"><table class="table table-hover"><thead><td>ردیف</td><td>کالا</td><td>تعداد</td><td>قیمت واحد</td><td>قیمت کل</td></thead>`;
+                            var cargosCount = 0;
                             $.each(item.cargos, function (index, cargo) {
                                 modals += `<tr><td>${index + 1}</td><td>${cargo.name}</td><td>${cargo.count}</td><td>${cargo.main_price}</td><td>${parseInt(cargo.count) * parseInt(cargo.main_price)}</td></tr>`
+                                cargosCount += parseInt(cargo.count);
                             })
-                            modals += `</table> </div>`;
+                            modals += `<tr style="background-color: #ececec"><td></td><td class="">مجموع تعداد کالاها</td><td>${cargosCount}</td><td></td><td></td></tr>`
+                            modals += `</table></div>`;
                             modals += `<div class="alert alert-info">توضیحات: ${item.comment ? item.comment : ''}</div>`;
                             modals += `<div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">خروج</button>
