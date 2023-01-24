@@ -40,6 +40,8 @@ class CargoCollection extends JsonResource
             'main_price' => $this->main_price_method,
             'is_favorite' => $is_favorite,
             'saleOff' => $this->is_amazing() ? round(100 * ($this->price - Amazing::where('cargo_id', $this->id)->first()->price_discount) / $this->price, 1) : round(100 * ($this->price - $this->price_discount) / $this->price, 1),
+            'vote_average'=>$this->vote_average,
+            'buy_count'=>$this->buy_count
 
         ];
     }
