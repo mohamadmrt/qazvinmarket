@@ -94,8 +94,8 @@ class HomeController extends Controller
         } else {
             $cargos1 = Cargo::where('name', 'like', '%' . $request_q . '%')
                 ->orderByRaw("CASE WHEN name LIKE '" . $request_q . "%' THEN 1 WHEN name LIKE '%" . $request_q . "' THEN 3 ELSE 2 END")
-                ->where('price', '>', 0) ->where('status', '1')->get();
-            $cargos2 = Cargo::WhereRaw("MATCH(name) AGAINST('" . $request_q . "' IN BOOLEAN MODE)")->where('price', '>', 0) ->where('status', '1')->get();
+                ->where('price', '>', 0) ->where('status', '1')->orderBy('name')->get();
+            $cargos2 = Cargo::WhereRaw("MATCH(name) AGAINST('" . $request_q . "' IN BOOLEAN MODE)")->where('price', '>', 0) ->where('status', '1')->orderBy('name')->get();
             $cargos = $cargos1->merge($cargos2);
         }
 
