@@ -42,6 +42,11 @@ class Cargo extends Model
                     break;
 
                 case(3):
+                    //search by max vote average
+                    $cargos = $cargos->sortByDesc('vote_average');
+                    break;
+
+                case(4):
                     //search by max buy count
                     $cargos = $cargos->sortByDesc('buy_count');
                     break;
