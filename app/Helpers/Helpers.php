@@ -1,6 +1,7 @@
 <?php
 
 use App\Market;
+use App\Sms;
 use Hashids\Hashids;
 use Illuminate\Support\Facades\Session;
 use Morilog\Jalali\CalendarUtils;
@@ -154,10 +155,12 @@ if (!function_exists('verify_payment')) {
                 if ($settle == 0) {
                     return 0;
                 } else {
+                    $sms = Sms::insert('10', '09300606049', 'error in settel,saleRefrenceId:'.$SaleReferenceId.'-saleOrderId:'.$SaleOrderId);
                     $client->bpReversalRequest($parameters);
                     return 1;
                 }
             } else {
+                $sms = Sms::insert('10', '09300606049', 'error in verify,saleRefrenceId:'.$SaleReferenceId.'-saleOrderId:'.$SaleOrderId);
                 $client->bpReversalRequest($parameters);
                 return 1;
             }
