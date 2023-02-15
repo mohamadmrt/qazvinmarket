@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
+    public function testMrt()
+    {
+        return 'test mrt';
+    }
     protected function user()
     {
         return auth()->guard('api')->user();

@@ -23,7 +23,7 @@ Route::prefix("v1")->namespace('api\v1')->middleware('api')->group( function () 
 });
 //without authentication
 Route::prefix("v1")->namespace('api\v1')->group( function () {
-    Route::get('test-mrt','CartController@TestMrt');
+    Route::get('test-mrt','HomeController@testMrt');
     Route::get('vote/{order:url}',"CartController@vote");
     Route::get('get_products_from_bazara','SchedulerController@get_products_from_bazara');
     Route::resource('cargo', 'CargoController');
