@@ -56,6 +56,7 @@ Route::prefix('v1')->namespace('api\v1')->middleware("auth:api")->group(function
     //user
     Route::post('update_user_info' , 'UserController@update_user_info');
     Route::post('comment' , 'CommentController@store');
+    Route::post('convert_user_point' , 'UserController@convertUserPoint');
 
     //wallet pay
     Route::post('walletCharge' , 'WalletController@walletCharge');

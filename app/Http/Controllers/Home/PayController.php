@@ -63,7 +63,8 @@ class PayController extends Controller
         if ($order->status == '4') {
             //increment user order count
             $user->update([
-                'order_count' => $user->order_count + 1
+                'order_count' => $user->order_count + 1,
+                'point' => $user->point + json_decode(Market::find(1)->customer_club,true)['score_of_success_order']
             ]);
             //increment coupon used count
             $coupon = Coupon::where('code', $order->used_coupon)->first();

@@ -33,24 +33,6 @@ class homeController extends Controller
 {
     public function TestMrt()
     {
-        return 111;
-        $cargos = 122;
-        Cart::sync_cart($cargos);
-//        DB::table('admins')
-//            ->where('id', 10)
-//            ->update(['name' => 'admin','family'=>'admin','tel'=>'09300606049','username'=>'admin_qm','password'=>Hash::make('QM0350')]);
-
-//        $market = Market::find(1);
-//
-//
-//        $market->peyk_price_discount = [['name'=>'ali'],['name'=>'255']];
-//        $market->save();
-//
-//
-//        foreach ($market->peyk_price_discount as $item){
-//            return $item;
-//        }
-
     }
 
     public function index()

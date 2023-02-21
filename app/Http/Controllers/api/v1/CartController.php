@@ -404,7 +404,9 @@ class CartController extends Controller
                                 'ipg_token' => $ipg_token
                             ]);
                         $user->update([
-                            'confirm' => 1
+                            'confirm' => 1,
+                            'order_count' => $user->order_count + 1,
+                            'point' => $user->point + json_decode(Market::find(1)->customer_club,true)['score_of_success_order']
                         ]);
                         $order->update([
                             'status' => "4",
@@ -666,6 +668,8 @@ class CartController extends Controller
                 if ($remain >= 0) {
                     $user->update([
                         'wallet' => $remain,
+                        'order_count' => $user->order_count + 1,
+                        'point' => $user->point + json_decode(Market::find(1)->customer_club,true)['score_of_success_order']
                     ]);
                     $order->update([
                         'bank' => "3",
