@@ -10,15 +10,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\v1\CargoCollection;
 use App\Http\Resources\v1\CommentCollection;
 use App\Http\Resources\v1\MarketResource;
+use App\Market;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use function MongoDB\BSON\fromJSON;
+use function PHPUnit\Framework\isJson;
 
 class HomeController extends Controller
 {
-    public function testMrt()
+    public function testMrt(Request $request)
     {
-        return 'test mrt';
+
     }
     protected function user()
     {
