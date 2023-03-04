@@ -14,7 +14,9 @@ use App\Order;
 use App\Peyk;
 use App\ResturantLog;
 use App\SMS;
+use App\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -118,7 +120,7 @@ class MarketController extends AdminController
                 'sms_number' => '210002100'
             ]);
             $state = true;
-        }elseif ($tel == '90002550') {
+        } elseif ($tel == '90002550') {
             $market->update([
                 'sms_number' => '90002550'
             ]);
@@ -234,10 +236,10 @@ class MarketController extends AdminController
         $peyk_price_discount = array();
 
         $i = 0;
-        foreach ($request->peyk_discount as $index=> $item) {
-            if ($index % 2 == 0){
+        foreach ($request->peyk_discount as $index => $item) {
+            if ($index % 2 == 0) {
                 if ($i < (count($request->peyk_discount))) {
-                    array_push($peyk_price_discount, [$item => $request->peyk_discount[$i+1]]);
+                    array_push($peyk_price_discount, [$item => $request->peyk_discount[$i + 1]]);
                     $i += 2;
                 }
             }
@@ -260,6 +262,77 @@ class MarketController extends AdminController
                 'status' => 'fail'
             ], 422);
         }
+    }
+
+    public function changeCustomerClub(Request $request)
+    {
+
+        $jayParsedAry = [
+            "levels" => [
+                "1" => [
+                    "id" => 1,
+                    "product" => "Pineapple",
+                    "price" => 90
+                ],
+                "2" => [
+                    "id" => 1,
+                    "product" => "Pineapple",
+                    "price" => 90
+                ],
+                "3" => [
+                    "id" => 2,
+                    "product" => "Orange",
+                    "price" => 70
+                ]
+            ]
+        ];
+
+//        $a = array('green', 'red', 'yellow');
+//        $b = array('avocado', 'apple', 'banana');
+//        $c = array_combine($a, $b);
+//        return $a;
+
+
+//        return json_encode($jayParsedAry);
+
+
+        $levelsForPay = array();
+
+
+        $levels = array();
+        $scores = array();
+        foreach ($request->data['customer_club_levels'] as $index => $item) {
+            array_push($levels, $item);
+            array_push($scores, ['min_score' => $request->data['customer_club_levels_min'][$index], 'max_score' => $request->data['customer_club_levels_max'][$index]]);
+        }
+        $customer_club['levels'] = array_combine($levels, $scores);
+
+
+
+        $levelsForPay = array();
+        $scores = array();
+        foreach ($request->data['customer_club_levels_for_pay'] as $index => $item) {
+            array_push($levelsForPay, $item);
+            array_push($scores, ['score' => $request->data['customer_club_levels_score_per_pay'][$index], 'amount' => $request->data['customer_club_levels_amount_per_pay'][$index]]);
+        }
+        $customer_club['convert_score_to_wallet_money'] = array_combine($levelsForPay, $scores);
+        $customer_club['score_of_success_order'] = $request->data['score_of_success_order'];
+        $customer_club['currency']= 'TMN';
+
+
+
+        $market = Market::find(1);
+
+        if ($market->update([
+            'customer_club' => json_encode($customer_club)
+        ])) {
+            return response()->json([
+                'data' => [],
+                'message' => 'تغییرات با موفقیت اعمال شد.',
+                'status' => 'ok'
+            ]);
+        }
+
     }
 
     public function change_market_tels(Request $request)

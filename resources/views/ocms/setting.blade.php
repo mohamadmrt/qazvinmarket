@@ -130,29 +130,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="well col-lg-6" style="margin-left: auto;margin-right: 20% ">
-                        <div class="text-center">
-                            <h4>شماره موبایل برای سفارشگیری<a class="btn btn-success btn-sm" title="افزودن شماره"
-                                                              id="addMobile" style="font-size: 12px"><span
-                                        class="fa fa-plus-circle"></span></a></h4>
-                        </div>
-                        <div class="text-center">
-                            <span style="color: #5cb85c" class="showDelay" id="order_mobile_error"></span>
-                            <div id="order_mobiles">
-                                <div class="form-group form-inline" style="padding: 2px"><a title="حذف"
-                                                                                            class="del-num btn btn-sm btn-danger"><span
-                                            class="fa fa-times-circle"></span></a><input dir="ltr" class="form-control"
-                                                                                         style="width:120px;text-align: left;"
-                                                                                         name="order_mobile[]"></div>
-                            </div>
-                            <div style="height: 50px;padding-top: 10px;">
-                                <input class="btn btn-success" value="ذخیره" name="btn-delay" type="button"
-                                       id="change_order_mobiles" size="40">
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="well col-lg-6" style="margin-left: auto;margin-right: 20% ">
@@ -200,6 +177,43 @@
                             <div style="height: 50px;padding-top: 10px;">
                                 <input class="btn btn-success" value="ذخیره" name="btn-delay" type="button"
                                        id="change_peyk_discount" size="40">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="well col-lg-6" style="margin-left: auto;margin-right: 20% ">
+                        <div class="text-center">
+                            <h4> باشگاه مشتریان <a class="btn btn-success btn-sm" title="افزودن"
+                                                   id="addCustomerClub" style="font-size: 12px"><span
+                                        class="fa fa-plus-circle"></span></a></h4>
+                        </div>
+                        <div class="text-center">
+                            <span style="color: #5cb85c" class="showDelay" id="customer_club_message"></span>
+                            <div id="customerClub">
+                                <div class="form-group form-inline" style="padding: 2px"><a title="حذف"
+                                                                                            class="del-num btn btn-sm btn-danger"><span
+                                            class="fa fa-times-circle"></span></a>سطح<input dir="ltr"
+                                                                                            class="form-control"
+                                                                                            style="width:120px;text-align: left;"
+                                                                                            name="customer_club_levels[]">حداقل
+                                    امتیاز<input dir="ltr" class="form-control" style="width:120px;text-align: left;"
+                                                 name="customer_club_levels_min[]">حداکثر امتیاز<input dir="ltr"
+                                                                                                       class="form-control"
+                                                                                                       style="width:120px;text-align: left;"
+                                                                                                       name="customer_club_levels_max[]">
+                                </div>
+                            </div>
+                            <div id="customerClubLevels">
+                            </div>
+
+                            <div class="form-group form-inline" style="padding: 2px">
+                                امتیاز به ازاء هر خرید موفق: <input dir="ltr" class="form-control" style="width:120px;text-align: left;" name="score_of_success_order">
+                            </div>
+
+                            <div style="height: 50px;padding-top: 10px;">
+                                <input class="btn btn-success" value="ذخیره" name="btn-delay" type="button"
+                                       id="change_customer_club" size="40">
                             </div>
                         </div>
                     </div>
@@ -307,6 +321,10 @@
             $('#addPeykPriceDiscount').click(function () {
                 $('#peykPriceDiscount').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف"  class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a><input dir="ltr" class="form-control"  style="width:120px;text-align: left;" name="peyk_discount[]"> درصد تخفیف برای خرید بیشتر از <input dir="ltr" class="form-control"  style="width:120px;text-align: left;" name="peyk_discount[]"> تومن </div>`);
             });
+            $('#addCustomerClub').click(function () {
+                $('#customerClub').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف" class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a> سطح <input dir="ltr" class="form-control" style="width:120px;text-align: left;" name="customer_club_levels[]"> حداقل امتیاز <input dir="ltr" class="form-control" style="width:120px;text-align: left;"  name="customer_club_levels_min[]"> حداکثر امتیاز <input dir="ltr" class="form-control" style="width:120px;text-align: left;"  name="customer_club_levels_max[]"></div>`);
+                $('#customerClubLevels').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف" class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a> سطح <input dir="ltr" class="form-control" style="width:120px;text-align: left;" name="customer_club_levels_for_pay[]"> هر <input dir="ltr" class="form-control" style="width:120px;text-align: left;" name="customer_club_levels_score_per_pay[]"> امتیاز <input dir="ltr" class="form-control" style="width:120px;text-align: left;"  name="customer_club_levels_amount_per_pay[]"> تومان`);
+            });
             $('#addMarketTel').click(function () {
                 $('#market_tels').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف"  class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a><input dir="ltr" class="form-control"  style="width:120px;text-align: left;" name="market_tel[]"></div>`);
             });
@@ -344,18 +362,30 @@
 
                         let market = response.data
 
+
                         if (response.status === 'ok') {
-
-
-                            if (market.peyk_price_discount !== ''){
+                            if (market.peyk_price_discount !== '') {
                                 $('#peykPriceDiscount').empty();
                             }
-                                $.each(JSON.parse(market.peyk_price_discount), function (i, val) {
-                                    $.each(val, function (key, value) {
-                                        $('#peykPriceDiscount').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف"  class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a><input dir="ltr" class="form-control"  style="width:120px;text-align: left;" value="${key}" name="peyk_discount[]"> درصد تخفیف برای خرید بیشتر از <input dir="ltr" class="form-control"  style="width:120px;text-align: left;" value="${value}" name="peyk_discount[]"> تومن </div>`);
-                                    });
-                                    // $("#" + i).append(document.createTextNode(" - " + val));
+                            $.each(JSON.parse(market.peyk_price_discount), function (i, val) {
+                                $.each(val, function (key, value) {
+                                    $('#peykPriceDiscount').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف"  class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a><input dir="ltr" class="form-control"  style="width:120px;text-align: left;" value="${key}" name="peyk_discount[]"> درصد تخفیف برای خرید بیشتر از <input dir="ltr" class="form-control"  style="width:120px;text-align: left;" value="${value}" name="peyk_discount[]"> تومن </div>`);
                                 });
+                            });
+
+                            if (market.customer_club !== '') {
+                                $('#customerClub').empty();
+                            }
+                            $.each(JSON.parse(market.customer_club)['levels'], function (i, val) {
+                                $('#customerClub').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف" class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a> سطح <input dir="ltr" class="form-control" style="width:120px;text-align: left;" value="${i}" name="customer_club_levels[]"> حداقل امتیاز <input dir="ltr" class="form-control" style="width:120px;text-align: left;" value="${val['min_score']}" name="customer_club_levels_min[]"> حداکثر امتیاز <input dir="ltr" class="form-control" style="width:120px;text-align: left;" value="${val['max_score']}" name="customer_club_levels_max[]"></div>`);
+                            });
+
+                            $("input[name='score_of_success_order']").val(JSON.parse(market.customer_club)['score_of_success_order']);
+
+                            $.each(JSON.parse(market.customer_club)['convert_score_to_wallet_money'], function (i, val) {
+                                $('#customerClubLevels').append(`<div class="form-group form-inline" style="padding: 2px"><a title="حذف" class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a> سطح <input dir="ltr" class="form-control" style="width:120px;text-align: left;" value="${i}" name="customer_club_levels_for_pay[]"> هر <input dir="ltr" class="form-control" style="width:120px;text-align: left;" value="${val['score']}" name="customer_club_levels_score_per_pay[]"> امتیاز <input dir="ltr" class="form-control" style="width:120px;text-align: left;" value="${val['amount']}" name="customer_club_levels_amount_per_pay[]"> تومان </div>`);
+                            });
+
                             $('#marketSmsNumber').text(market.sms_number);
                             $('#market_name').text(market.name)
                             $('#market_address').text(market.address)
@@ -370,16 +400,15 @@
                             $('#close_market').prop('checked', market.service === '1')
                             $('#supports').val(market.support.join(' - '))
                             $('#delay_support').val(market.delay_support.join(' - '))
-                            $('#market_tels').html(market_tels)
-                            let order_mobiles = ``;
-                            $.each(market.order_mobiles, function (key, mobile) {
-                                order_mobiles += `<div class="form-group form-inline" style="padding: 2px"><a title="حذف"  class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a><input dir="ltr" class="form-control" value="${mobile}" style="width:120px;text-align: left;" name="order_mobile[]"></div>`
-                            })
-                            $('#order_mobiles').html(order_mobiles)
+
+
                             let market_tels = ``;
+
+
                             $.each(market.tel, function (key, item) {
                                 market_tels += `<div class="form-group form-inline" style="padding: 2px"><a title="حذف"  class="del-num btn btn-sm btn-danger"><span class="fa fa-times-circle"></span></a><input dir="ltr" class="form-control" value="${item}" style="width:120px;text-align: left;" name="market_tel[]"></div>`
                             })
+                            $('#market_tels').html(market_tels)
 
 
                             let options = {
@@ -469,6 +498,64 @@
                         }
                     });
                 });
+                $("#change_customer_club").click(function () {
+                    $('#customer_club_message').text('')
+                    let customer_club_levels = $("input[name='customer_club_levels[]']")
+                        .map(function () {
+                            return $(this).val()
+                        }).get();
+                    let customer_club_levels_min = $("input[name='customer_club_levels_min[]']")
+                        .map(function () {
+                            return $(this).val()
+                        }).get();
+                    let customer_club_levels_max = $("input[name='customer_club_levels_max[]']")
+                        .map(function () {
+                            return $(this).val()
+                        }).get();
+                    let customer_club_levels_for_pay = $("input[name='customer_club_levels_for_pay[]']")
+                        .map(function () {
+                            return $(this).val()
+                        }).get();
+                    let customer_club_levels_score_per_pay = $("input[name='customer_club_levels_score_per_pay[]']")
+                        .map(function () {
+                            return $(this).val()
+                        }).get();
+                    let customer_club_levels_amount_per_pay = $("input[name='customer_club_levels_amount_per_pay[]']")
+                        .map(function () {
+                            return $(this).val()
+                        }).get();
+                    let score_of_success_order = $("input[name='score_of_success_order']").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/ocms/change_customer_club",
+                        data: {
+                            data: {
+                                customer_club_levels,
+                                customer_club_levels_min,
+                                customer_club_levels_max,
+                                customer_club_levels_for_pay,
+                                customer_club_levels_score_per_pay,
+                                customer_club_levels_amount_per_pay,
+                                score_of_success_order
+                            }, "_token": "{{ csrf_token() }}"
+                        },
+                        success: function (response) {
+                            console.log(JSON.stringify(response))
+                            if (response.status === 'ok') {
+                                $('#customer_club_message').show().text(response.message);
+                            } else {
+                                swal({
+                                    type: 'error',
+                                    title: response.message
+                                });
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseJSON.message)
+                        }
+                    });
+                });
                 $("#change_market_tels").click(function () {
                     $('#market_tel_error').text('');
                     let market_tels = $("input[name='market_tel[]']")
@@ -480,6 +567,7 @@
                         url: "/ocms/change_market_tels",
                         data: {market_tels, "_token": "{{ csrf_token() }}"},
                         success: function (response) {
+                            console.log(response);
                             if (response.status === 'ok') {
                                 $('#market_tel_error').show().text(response.message);
                             } else {
@@ -558,7 +646,6 @@
                     } else {
                         $('#shipping_method_error').text('حداقل یک روش برای ارسال انتخاب نمایید');
                     }
-
                 });
 
 
