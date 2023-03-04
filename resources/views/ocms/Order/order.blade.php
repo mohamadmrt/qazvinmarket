@@ -292,7 +292,7 @@
                             data += `<tr style="background-color:${item.status < 2 ? '#FFD9B3' : ''}${item.status == 2 ? '#ffbfbf' : ''}${item.status == 4 ? '#ffffff' : ''}" title="${item.valid = 0 ? 'نامعتبر' : ''}" >`;
                             data += `<td>${item.id}</td>`;
                             data += `<td>${item.created_at}</td>`;
-                            data += `<td>${item.is_confirm !== "1378/10/11 00:00:00" ? item.is_confirm : '<button class="btn btn-success confirm" onclick="confirmOrder(' + item.id + ')" title="تایید ارسال"><i class="fa fa-check"></i></button>'}</td>`;
+                            data += `<td>${item.is_confirm !== "1378/10/11 00:00:00" ? item.is_confirm : '<button class="btn btn-success confirm" onclick="confirmOrder(' + item.id + ')" title="تایید ارسال"><i class="fa fa-check"></i></button>'}${item.gathering === 1 ? '<div style="margin: 10px 0; color: red">جمع شده</div>' : '<button class="btn btn-info confirm" onclick="gatheringOrder(' + item.id + ')" title="جمع آوری">جمع آوری</button>'}</td>`;
                             data += `<td><span class="label ${item.delayed ? 'label-danger' : 'label-success'}">${item.delayed ? 'بله' : 'خیر'}</span></td>`;
                             data += `<td><strong>${item.market_name}</strong><br>${item.market_tel.join(' - ')}<br>${item.market_mobile.replace(/-/g, '<br>')}</td>`;
                             data += `<td>${item.name}<br><span class="btn btn-danger btn-sm">«تعداد خرید:${item.buy_count}»</span><hr>${item.user_isQasedak ? 'قاصدکی: ' + formatPrice(item.Amount_ghasedak) : ''}</td>`;
@@ -481,6 +481,16 @@ ${item.bank === '4' ? '<strong class="label label-success">نقدی</strong>' : 
                     _search(1)
                 })
             }
+        }
+        function gatheringOrder($id) {
+
+                $.ajax({
+                    method: 'GET',
+                    url: "/ocms/gatheringOrder" + '/' + $id
+                }).done(function (result) {
+                    _search(1)
+                })
+
         }
     </script>
 @endsection

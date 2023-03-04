@@ -59,6 +59,12 @@ class OrderController extends AdminController
             return response()->json(['data' => [], 'message' => 'عملیات با موفقیت انجام شد', 'status' => 'ok']);
         }
     }
+    public function gatheringOrder(Order $order)
+    {
+        if ($order->update(['gathering' => 1])) {
+            return response()->json(['data' => [], 'message' => 'عملیات با موفقیت انجام شد', 'status' => 'ok']);
+        }
+    }
 
     public function cancelOrder(Order $order)
     {

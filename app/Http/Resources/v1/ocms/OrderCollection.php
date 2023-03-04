@@ -50,6 +50,7 @@
             return [
                 'id'=>$this->id,
                 'is_confirm'=>gregorian2jalali($this->confirm),
+                'gathering'=>$this->gathering,
                 'delayed' => $this->delayed=='1',
 //                'is_lated' => $this->confirm!=null?abs($this->confirm->diffInMinutes($this->created_at))/60>20:false,
                 'created_at'=>gregorian2jalali($this->created_at),

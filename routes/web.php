@@ -95,6 +95,7 @@ Route::group(['middleware' => 'admin', 'namespace' => 'Admin', 'prefix' => 'ocms
 
     Route::post('/cancelledorderList', 'OrderController@cancelledorderList')->name('ocms.cancelledorderList');
     Route::get('/confirmOrder/{order}', 'OrderController@confirmOrder')->name('ocms.confirmOrder');
+    Route::get('/gatheringOrder/{order}', 'OrderController@gatheringOrder')->name('ocms.gatheringOrder');
     Route::post('/cancelOrder/{order}', 'OrderController@cancelOrder')->name('ocms.cancelOrder');
     Route::get('/resendSms/{id}', 'OrderController@resendSms')->name('ocms.resendSms');
     Route::get('/resend_factor/{order}', 'OrderController@resend_factor')->name('ocms.resend_factor');
@@ -120,6 +121,7 @@ Route::group(['middleware' => 'admin', 'namespace' => 'Admin', 'prefix' => 'ocms
     Route::get('/get_markets', 'MarketController@get_markets');
     Route::post('/change_order_mobiles', 'MarketController@change_order_mobiles');
     Route::post('/change_peyk_discount', 'MarketController@change_peyk_discount');
+    Route::post('/change_customer_club', 'MarketController@changeCustomerClub');
     Route::post('/change_market_tels', 'MarketController@change_market_tels');
     Route::post('/change_market_address', 'MarketController@change_market_address');
     Route::post('/change_shipping_method', 'MarketController@change_shipping_method');
