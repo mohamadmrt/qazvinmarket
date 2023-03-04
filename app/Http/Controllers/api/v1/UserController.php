@@ -22,7 +22,7 @@ use App\User;
 use App\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Morilog\Jalali\CalendarUtils;
 use Morilog\Jalali\Jalalian;
@@ -41,6 +41,7 @@ class UserController extends Controller
             $validData = Validator::make($request->all(), [
                 'username' => 'required|regex:/(09)[0-9]{9}/',
             ]);
+
             if ($validData->fails()) {
                 return response()->json([
                     'data' => $validData->messages()->all(),
@@ -48,9 +49,11 @@ class UserController extends Controller
                     'status' => "invalid"
                 ], 422);
             }
+
             $request_username = fa2en($request->username);
             $user = User::findByUsername($request_username);
             $code = rand(1111, 9999);
+
             if ($user) {
                 if ($user->status == '2') {
                     return response()->json([
@@ -62,7 +65,24 @@ class UserController extends Controller
                 $user->confirm_expire = Carbon::now()->addMinutes(2);
                 $user->password = bcrypt($code);
                 $user->save();
+
             } else {
+
+                $user_invited = DB::table('referral')->where('invited_user', $request_username)->where('invite', 0)->get();
+                if ($user_invited->isNotEmpty()) {
+                    foreach ($user_invited as $item) {
+                        $random_code = random_int(0, 100000000);
+                        Coupon::create(['market_id' => 1, 'user_id' => 10, 'title' => 'کدتخفیف کاربر', 'code' => $random_code, 'min_price' => 30000, 'max_count' => 1, 'max_discount' => 100000, 'discount_type' => 'price', 'discount_amount' => 35000, 'status' => '1', 'start_date' => Carbon::now(), 'end_date' => Carbon::now()->addDays(30)]);
+                        $sms = Sms::insert(1, $item->invited_user, 'کد تخفیف 35 هزار تومانی برای شما در نظر گرفته شد. مهلت استفاده: 30 روز. کد تخفیف: ' . $random_code . ' (قزوین مارکت)');
+                        event(new UserActivation($sms));
+                        DB::table('referral')->where('invited_user', $item->invited_user)->update(['invite' => 1]);
+                        $presenter_user = User::where('username', $item->presenter_user)->first();
+                        $presenter_user->point += 10;
+                        $presenter_user->save();
+                        Sms::insert(1, $item->presenter_user, '10 امتیاز بابت ثبت نام کاربر ' . $item->invited_user . ' به شما تعلق گرفت. (قزوین مارکت)');
+                    }
+                }
+
                 $user = User::create([
                     'username' => $request_username,
                     'confirm' => $code,
@@ -478,8 +498,26 @@ class UserController extends Controller
                 break;
 
         }
+    }
 
-
+    public function inviteFirend(Request $request)
+    {
+        $validData = Validator::make($request->all(), [
+            'phone_number' => 'required|regex:/[0-9]/',
+        ]);
+        if ($validData->fails()) {
+            return response()->json([
+                'data' => $validData->messages()->all(),
+                'message' => "شماره تلفن وارد شده معتبر نیست.",
+                'status' => "invalid"
+            ], 422);
+        }
+        if (DB::table('referral')->insert(['presenter_user' => auth()->user()->username, 'invited_user' => $request->phone_number]))
+            return response()->json([
+                'data' => [],
+                'message' => 'درخواست دعوت ارسال شد.',
+                'status' => 'ok'
+            ], 200);
     }
 
     public function logout()

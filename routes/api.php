@@ -64,6 +64,7 @@ Route::prefix('v1')->namespace('api\v1')->middleware("auth:api")->group(function
 
     //profile
     Route::get('profile','UserController@profile');
+    Route::post('invite_friend','UserController@inviteFirend');
     Route::get('/orderList','UserController@orderList');
     Route::get('/total_transactions','UserController@total_transactions');
 
