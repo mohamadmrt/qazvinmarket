@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Comment;
+use App\Market;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class CommentController extends Controller
                     'status' => "invalid"
                 ], 422);
             }
+            $customer_club = json_decode(Market::find(1)->customer_club, true);
             $request_id = fa2en($request->id);
             $request_comment = fa2en($request->comment);
             $user = $this->user();
@@ -54,7 +56,6 @@ class CommentController extends Controller
                         'status' => 'fail'
                     ], 422);
                 } else {
-
                     $comment = new Comment();
                     $comment->market_id = 1;
                     $comment->user_id = $user->id;
@@ -65,6 +66,8 @@ class CommentController extends Controller
                     $comment->status = "1";
                     $comment->private = "0";
                     $comment->save();
+                    $user->point += $customer_club['point_for_register_comment'];
+                    $user->save();
                 }
                 return response([
                     'data' => [],
